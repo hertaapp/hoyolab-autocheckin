@@ -1,18 +1,18 @@
-<h1>Hoyolab Auto Checkin Tool</h1>
-
+<section>
 {{ if .msg }}
 <div class="alert alert-success" role="alert">
   {{ .msg }}
 </div>
 {{ end }}
 
-<p>uid: {{ .ltuid }}</p>
+<h2>Auto Checkin</h2>
+<p><strong>HoyoLab UID: {{ .ltuid }}</strong></p>
 
 <form action="update" method="post">
   {{ if .notFound }}
   <p>This account is not registered for auto login.</p>
   {{ else }}
-  This account is registered for auto login with the following games. 
+  This account is registered for auto checkin with the following games. 
   {{ end }}
   
   <div class="form-check">
@@ -35,15 +35,19 @@
     {{ end }}
   </div>
 </form>
+</section>
 
 {{ if not .notFound }}
-Remove me from auto login.
+<section>
+  <h2>Remove Auto Checkin</h2>
+<p>Click the "Remove" button to remove this account from auto login. All cookies will be removed from our service.</p>
 <form action="remove" method="post">
-  <button type="submit" class="btn btn-danger">Delete</button>
+  <button type="submit" class="btn btn-danger">Remove</button>
 </form>
-{{ end }}
+</section>
 
-<h2>Recent Logs</h2>
+<section>
+<h2>Recent Checkin Logs</h2>
 <table class="table">
   <tr>
     <th>Time</th>
@@ -59,6 +63,8 @@ Remove me from auto login.
   </tr>
   {{ end }}
 </table>
+</section>
+{{ end }}
 
 <script>
 $(document).ready(() => {

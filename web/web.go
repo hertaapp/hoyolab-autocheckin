@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/fs"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -225,6 +226,10 @@ func updateAutoCheckin(c *gin.Context) {
 }
 
 func Serve(host string, port int) error {
+
+	if !strings.HasPrefix(os.Args[0], "/tmp/") {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
 	viewsDir, err := fs.Sub(embedFs, "views")
 	if err != nil {

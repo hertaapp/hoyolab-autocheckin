@@ -128,7 +128,7 @@ func AllUserCheckin() {
 
 func StartCron() {
 	s := gocron.NewScheduler(time.UTC)
-	s.Cron("0 5 17 * *").Do(AllUserCheckin)
+	s.Cron("0 5 21 * *").Do(AllUserCheckin)
 
 	log.Println("Cron started.")
 	s.StartBlocking()

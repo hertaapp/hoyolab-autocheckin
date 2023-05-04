@@ -12,6 +12,11 @@ import (
 )
 
 func serve(c *cli.Context) error {
+	// setup db
+	db := model.GetDb()
+	db.AutoMigrate(&model.User{}, &model.EnabledGames{}, &model.CheckinLog{})
+	log.Printf("Database connected")
+
 	// start a web server on the specified host and port
 	web.Serve(c.String("host"), c.Int("port"))
 
@@ -19,6 +24,11 @@ func serve(c *cli.Context) error {
 }
 
 func runCron(c *cli.Context) error {
+	// setup db
+	db := model.GetDb()
+	db.AutoMigrate(&model.User{}, &model.EnabledGames{}, &model.CheckinLog{})
+	log.Printf("Database connected")
+
 	cron.StartCron()
 	return nil
 }
@@ -61,11 +71,6 @@ func main() {
 			},
 		},
 	}
-
-	// setup db
-	db := model.GetDb()
-	db.AutoMigrate(&model.User{}, &model.EnabledGames{}, &model.CheckinLog{})
-	log.Printf("Database connected: %v", db)
 
 	app.Run(os.Args)
 

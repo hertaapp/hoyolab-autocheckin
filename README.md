@@ -14,7 +14,7 @@ The following packages are required:
 
 ```
 gorm.io/gorm                # ORM
-gorm.io/driver/mysql        # ORM
+gorm.io/driver/sqlite       # ORM
 github.com/gin-gonic/gin    # web framework
 github.com/imroc/req/v3     # send http request
 github.com/go-co-op/gocron  # cron

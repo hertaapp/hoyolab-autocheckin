@@ -132,6 +132,6 @@ func StartCron(crontab string) {
 	s := gocron.NewScheduler(time.UTC)
 	s.Cron(crontab).Do(AllUserCheckin)
 
-	log.Println("Cron started.")
+	log.Println("Cron started. crontab: ", crontab)
 	s.StartBlocking()
 }

@@ -2,14 +2,20 @@ package web
 
 import (
 	"bytes"
+	"embed"
 	"fmt"
+	"io/fs"
 	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kataras/blocks"
 )
 
-var views *blocks.Blocks
+var (
+	//go:embed views/*
+	embedFs embed.FS
+	views   *blocks.Blocks
+)
 
 func home(c *gin.Context) {
 	buf := new(bytes.Buffer)
@@ -18,7 +24,7 @@ func home(c *gin.Context) {
 		log.Fatal("Error executing template: ", err)
 	}
 
-	c.String(200, buf.String())
+	c.Data(200, "text/html", buf.Bytes())
 }
 
 func login(c *gin.Context) {
@@ -39,8 +45,14 @@ func addAutoCheckin(c *gin.Context) {
 
 func Serve(host string, port int) error {
 
-	views = blocks.New("./views")
-	err := views.Load()
+	viewsDir, err := fs.Sub(embedFs, "views")
+	if err != nil {
+		log.Fatal("Error getting views directory: ", err)
+	}
+
+	views = blocks.New(viewsDir)
+	err = views.Load()
+
 	if err != nil {
 		log.Fatal("Error loading views: ", err)
 	}

@@ -13,9 +13,11 @@ Auto-checkin service for Hoyolab games, including Honkai Impact 3rd, Genshin Imp
 The following packages are required:
 
 ```
-gorm.io/gorm
-github.com/gin-gonic/gin
-github.com/imroc/req/v3
-github.com/go-co-op/gocron
+gorm.io/gorm                # ORM
+gorm.io/driver/mysql        # ORM
+github.com/gin-gonic/gin    # web framework
+github.com/imroc/req/v3     # send http request
+github.com/go-co-op/gocron  # cron
+github.com/kataras/blocks   # templating
 ```
 

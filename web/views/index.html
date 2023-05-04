@@ -1,1 +1,75 @@
-<h1>Auto Checkin</h1>
+<style>
+.bookmarklet {
+  background-color: #007bff;
+  border: 1px solid #000;
+  padding: 2px 16px;
+  border-radius: 2px;
+  text-decoration: none;
+  color: #fff;
+}
+</style>
+<h1>Hoyolab Auto Checkin</h1>
+
+<p>
+  This is an online tool to help you checkin on
+  <a href="https://www.hoyolab.com/">Hoyolab</a> automatically. Currently
+  supported games include:
+</p>
+<ul>
+  <li><a href="https://genshin.hoyoverse.com/" target="_blank" rel="noopener noreferrer nofollow">Genshin Impact</a></li>
+  <li><a href="https://honkaiimpact3.hoyoverse.com/" target="_blank" rel="noopener noreferrer nofollow">Honkai Impact 3rd</a></li>
+  <li><a href="https://hsr.hoyoverse.com/" target="_blank" rel="noopener noreferrer nofollow">Honkai: Star Rails</a></li>
+</ul>
+
+<p>* Only Global server is supported. CN server is NOT supported.</p>
+
+<h2 style="color: #f00">WARNING: READ BEFORE USING!</h2>
+
+<p>
+  This tool requires your Hoyolab cookie to work. Please make sure you
+  understand the following before using this tool:
+</p>
+<ul>
+  <li>
+    This tool <strong>WILL store your cookie</strong> in our database. This is the only way to
+    checkin daily. We guarantee that your cookie will only be used for daily checkin.
+  </li>
+  <li>
+    Leaking your Hoyolab cookie to others, including this tool, is <strong>very risky</strong> and may
+    result in your Hoyolab account (NOT your game accounts) being stolen. 
+    We try our best to protect your cookie, but we cannot guarantee that your
+    cookie will not be leaked. In case of a leak, we will notify you as soon as
+    possible, and you should <strong>logout your Hoyolab account immediately</strong> to invalidate the leaked cookie.
+  </li>
+  
+  <li>
+    Please use this tool at your own risk. We are not responsible for any
+    damage caused by using this tool.
+  </li>
+</ul>
+  
+<h2>How to use</h2>
+<ul>
+  <li>Make sure your bookmark bar is visible in your browser.</li>
+  <li>Please drag this link to your bookmark bar (don't click it on this page): <a class="bookmarklet" href="javascript:cs=document.cookie.split(/;\s*/).map(v=>v.split('=')).reduce((a,b)=>({...a,[b[0]]:b[1]}),{});c=`_MHYUUID=${cs._MHYUUID};ltoken=${cs.ltoken};ltuid=${cs.ltuid}`;prompt('Copy this', c)">Hoyolab Auto Checkin</a></li>
+  <li>Open <a href="https://www.hoyolab.com/" target="_blank" rel="noopener noreferrer nofollow">Hoyolab</a> and login.</li>
+  <li>Click the bookmark you just added. If you see a popup window, copy the text in the window and click OK.</li>
+  <li>Paste the text in the input box below and click Submit.</li>
+</ul>
+
+<form action="/login" method="post">
+  Paste copied text here:<br>
+  <textarea name="hoyolab-cookie" rows="10" cols="80"></textarea>
+  <br>
+  <button type="submit">Submit</button>
+</form>
+
+<h2>
+  Disclaimer
+  <h2>
+    <p>
+      This tool is not affiliated with or endorsed by miHoYo. All rights
+      reserved by miHoYo.
+    </p>
+  </h2>
+</h2>

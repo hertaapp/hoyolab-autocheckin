@@ -1,0 +1,80 @@
+<h1>Hoyolab Auto Checkin Tool</h1>
+
+{{ if .msg }}
+<div class="alert alert-success" role="alert">
+  {{ .msg }}
+</div>
+{{ end }}
+
+<p>uid: {{ .ltuid }}</p>
+
+<form action="update" method="post">
+  {{ if .notFound }}
+  <p>This account is not registered for auto login.</p>
+  {{ else }}
+  This account is registered for auto login with the following games. 
+  {{ end }}
+  
+  <div class="form-check">
+    <input class="form-check-input" id="genshinCheckbox" type="checkbox" name="games[]" value="genshin" {{ if .enabledGames.GenshinEnabled }}checked{{ end }}>
+    <label class="form-check-label" for="genshinCheckbox">Genshin Impact</label>
+  </div>
+  <div>
+    <input class="form-check-input" id="honkai3rdCheckbox" type="checkbox" name="games[]" value="honkai3rd" {{ if .enabledGames.Honkai3rdEnabled }}checked{{ end }}>
+    <label class="form-check-label" for="honkai3rdCheckbox">Honkai Impact 3rd<label>
+  </div>
+  <div>
+    <input class="form-check-input" id="honkaistarrailCheckbox" type="checkbox" name="games[]" value="honkaistarrail" {{ if .enabledGames.HonkaiStarRailEnabled }}checked{{ end }}>
+    <label class="form-check-label" for="honkaistarrailCheckbox">Honkai Star Rail<label>
+  </div>
+  <div style="margin-top: 8px">
+    {{ if .notFound }}
+    <button type="submit" class="btn btn-primary">Start Auto Checkin</button>
+    {{ else }}
+    <button type="submit" class="btn btn-primary">Update</button>
+    {{ end }}
+  </div>
+</form>
+
+{{ if not .notFound }}
+Remove me from auto login.
+<form action="remove" method="post">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{{ end }}
+
+<h2>Recent Logs</h2>
+<table class="table">
+  <tr>
+    <th>Time</th>
+    <th>Game</th>
+    <th>Message</th>
+  </tr>
+  
+  {{ range .checkinLogs }}
+  <tr>
+    <td>{{ .CreatedAt }}</td>
+    <td>{{ .Game }}</td>
+    <td>{{ .Msg }}</td>
+  </tr>
+  {{ end }}
+</table>
+
+<script>
+$(document).ready(() => {
+  // if all checkboxes are unchecked, disable the submit button
+  const checkboxes = $('input[type="checkbox"]');
+  const submitButton = $('button[type="submit"]');
+  
+  function checkSubmitButton() {
+    if (checkboxes.filter(':checked').length === 0) {
+      submitButton.prop('disabled', true);
+    } else {
+      submitButton.prop('disabled', false);
+    }
+  }
+  
+  checkboxes.change(checkSubmitButton);
+  checkSubmitButton();
+})
+</script>

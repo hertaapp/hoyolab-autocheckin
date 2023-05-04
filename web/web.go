@@ -245,6 +245,7 @@ func Serve(host string, port int) error {
 
 	router := gin.Default()
 
+	router.Static("/static", "./static")
 	router.GET("/", home)
 	router.POST("/login", login)
 	router.GET("/logs", logs)

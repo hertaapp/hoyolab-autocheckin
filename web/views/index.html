@@ -2,6 +2,10 @@
 #how-to-use {
   display: none;
 }
+    
+video {
+  display: none;
+}
 
 </style>
 
@@ -79,14 +83,19 @@
 <section id="how-to-use">
   <h2>How to use</h2>
   <ol>
-    <li>Make sure your bookmark bar is visible in your browser.</li>
+    <li>Make sure your bookmark bar is visible in your browser. (If not, press Ctrl+Shift+B to show it.)</li>
+    </li>
     <li>
-      Please <strong>drag the button on the right to your bookmark bar</strong> (don't click it on this page):
+      Please <strong>drag the button on the right to your bookmark bar</strong> :
       <a
         class="btn btn-primary"
         href="javascript:cs=document.cookie.split(/;\s*/).map(v=>v.split('=')).reduce((a,b)=>({...a,[b[0]]:b[1]}),{});c=`_MHYUUID=${cs._MHYUUID};ltoken=${cs.ltoken};ltuid=${cs.ltuid}`;prompt('Copy this', c)"
         >Hoyolab Auto Checkin</a
-      >
+      > <button class="btn btn-outline-secondary btn-sm" id="show-me-how-bookmarklet">show me how</button><br>
+      <video id="show-me-how-bookmarklet" width="640" controls>
+        <source src="/static/save-bookmarklet.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </li>
     <li>
       Open
@@ -99,8 +108,12 @@
       and login.
     </li>
     <li>
-      <strong>Click the bookmark</strong> you just added. If you see a popup window, copy the
-      text in the window and click OK.
+      <strong>Click the bookmark</strong> you just added. When you see a popup window, copy the
+      text in the window and click OK. <button class="btn btn-outline-secondary btn-sm" id="show-me-how-cookie">show me how</button><br>
+      <video id="show-me-how-cookie" width="640" controls>
+        <source src="/static/get-cookie.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </li>
     <li>Paste the text in the input box below and click Submit.</li>
   </ol>
@@ -133,6 +146,16 @@ $(document).ready(() => {
     } else {
       $("#how-to-use").hide();
     }
+  });
+  
+  $("#show-me-how-bookmarklet").click(() => {
+    $("#show-me-how-bookmarklet").hide();
+    $("video#show-me-how-bookmarklet").show();
+  });
+  
+  $("#show-me-how-cookie").click(() => {
+    $("#show-me-how-cookie").hide();
+    $("video#show-me-how-cookie").show();
   });
 });
 </script>

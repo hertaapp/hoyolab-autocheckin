@@ -29,7 +29,12 @@ func runCron(c *cli.Context) error {
 	db.AutoMigrate(&model.User{}, &model.EnabledGames{}, &model.CheckinLog{})
 	log.Printf("Database connected")
 
-	cron.StartCron()
+	crontab := os.Getenv("CRONTAB")
+	if crontab == "" {
+		crontab = "5 17 * * *"
+	}
+
+	cron.StartCron(crontab)
 	return nil
 }
 

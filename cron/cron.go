@@ -76,6 +76,7 @@ func Checkin(game string, userId uint64, ltoken string, mhyuuid string) (string,
 }
 
 func UserCheckin(userId uint64) {
+	log.Println("UserCheckin started. userId: ", userId)
 	db := model.GetDb()
 
 	var (
@@ -111,6 +112,7 @@ func UserCheckin(userId uint64) {
 }
 
 func AllUserCheckin() {
+	log.Println("AllUserCheckin started.")
 	db := model.GetDb()
 
 	users := make([]model.User, 0)
@@ -126,11 +128,10 @@ func AllUserCheckin() {
 
 }
 
-func StartCron() {
+func StartCron(crontab string) {
 	s := gocron.NewScheduler(time.UTC)
-	s.Cron("0 5 21 * *").Do(AllUserCheckin)
+	s.Cron(crontab).Do(AllUserCheckin)
 
 	log.Println("Cron started.")
 	s.StartBlocking()
-
 }

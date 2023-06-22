@@ -21,7 +21,7 @@ type ApiInfo struct {
 var apiMap = map[string]ApiInfo{
 	"genshin": {
 		actId: "e202102251931481",
-		url:   "https://sg-hk4e-api.hoyolab.com/event/sol/sign?lang=en-us",
+		url:   "https://hk4e-api-os.hoyolab.com/event/sol/sign?lang=en-us",
 	},
 	"honkai3rd": {
 		actId: "e202110291205111",

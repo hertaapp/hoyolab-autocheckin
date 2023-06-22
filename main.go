@@ -6,6 +6,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
+	"hoyolabautocheckin/admin"
 	"hoyolabautocheckin/cron"
 	"hoyolabautocheckin/model"
 	"hoyolabautocheckin/web"
@@ -69,10 +70,43 @@ func main() {
 				},
 				Action: serve,
 			},
+
 			{
 				Name:   "cron",
 				Usage:  "Start a job scheduler",
 				Action: runCron,
+			},
+
+			{
+				Name:    "admin",
+				Aliases: []string{"a"},
+				Usage:   "Run admin tool",
+				Subcommands: []*cli.Command{
+					{
+						Name:   "ls",
+						Usage:  "List all users",
+						Action: admin.ListUsers,
+					},
+
+					{
+						Name:  "checkin",
+						Usage: "Checkin for specified user. Used for test.",
+						Flags: []cli.Flag{
+							&cli.Uint64Flag{
+								Name:     "uid",
+								Aliases:  []string{"u"},
+								Usage:    "User ID",
+								Required: true,
+							},
+						},
+						Action: func(c *cli.Context) error {
+							uid := c.Uint64("uid")
+							log.Printf("Checking in for user %s", uid)
+							cron.UserCheckin(uid)
+							return nil
+						},
+					},
+				},
 			},
 		},
 	}

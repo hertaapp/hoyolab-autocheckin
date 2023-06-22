@@ -1,2 +1,5 @@
 .sw*
+*.sh
 hoyolabautocheckin
+*.sql
+*.txt

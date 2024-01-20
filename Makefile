@@ -1,7 +1,9 @@
 BUILDDIR = ./build
-IMAGE_TAG = gcr.io/aki149/hoyolab-autocheckin:latest
+REPO = registry-v9qyr7rcvmzk22ds.idv2.com
+IMAGE_TAG = $(REPO)/hoyolab-autocheckin:latest
 
-.PHONY: build clean
+all: docker push_docker
+
 
 docker:
 	docker build -t ${IMAGE_TAG} .
